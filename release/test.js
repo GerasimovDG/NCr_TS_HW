@@ -1,5 +1,6 @@
 import { BinaryTree } from "./binary-tree.js";
-import { DeleteTree, DrawData, DrawTree, RemoveTree } from "./draw-tree.js";
+import { DrawTreeService } from "./draw-tree.js";
+const drawTreeService = new DrawTreeService();
 const tree = new BinaryTree();
 tree.addNode(16, "Apple");
 tree.addNode(23, "Juice");
@@ -18,7 +19,7 @@ const node = tree.getRoot();
 console.dir("Корень дерева:");
 console.dir(node);
 console.log(tree);
-DrawTree(tree);
+drawTreeService.drawTree(tree);
 const addBtn = document.getElementById("addBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const randomTreeBtn = document.getElementById("randomTreeBtn");
@@ -27,37 +28,43 @@ function addNode() {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     tree.addNode(+val);
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 function deleteNode() {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     const value = parseFloat(val);
     tree.deleteNode(value);
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 function findNode() {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     const value = parseFloat(val);
     const searchNode = tree.searchNode(value);
-    console.log((searchNode.getData()));
-    DrawData(searchNode);
+    if (searchNode) {
+        console.log((searchNode.getData()));
+        drawTreeService.drawData(searchNode);
+    }
+    else {
+        console.log("Нет такой вершины!");
+        drawTreeService.drawData(null);
+    }
 }
-function deleteTree() {
-    RemoveTree(tree);
-    DeleteTree(tree);
+function delTree() {
+    drawTreeService.removeTree(tree);
+    drawTreeService.deleteTree(tree);
 }
-function RandGenerateTree() {
-    deleteTree();
+function randGenerateTree() {
+    delTree();
     for (let i = 0; i < 10; i++) {
         const randNumb = Math.floor(Math.random() * (40 - 1 + 1)) + 1;
         tree.addNode(randNumb);
     }
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 // обработка нажатий на кнопки
 addBtn.addEventListener("click", addNode);
 deleteBtn.addEventListener("click", deleteNode);
-randomTreeBtn.addEventListener("click", RandGenerateTree);
+randomTreeBtn.addEventListener("click", randGenerateTree);
 findBtn.addEventListener("click", findNode);

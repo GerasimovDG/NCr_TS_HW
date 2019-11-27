@@ -6,30 +6,27 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<div>
     <div class="main">
-        <div class="text">
-            <h1>Двоичное дерево поиска</h1>
-            <h5>Герасимов Дмитрий</h5>
+        <div class="header">
+            <div class="header__text">
+                <h1>Двоичное дерево поиска</h1>
+                <h5>Герасимов Дмитрий</h5>
+            </div>
         </div>
-        <div class="container">
+        <div class="container" id="container">
             <div class="button-field">
-                <input id="input" value="" class="input" type="text" placeholder="Введите ключ">
-                <button id="addBtn" class="btn">Добавить</button>
-                <button id="deleteBtn" class="btn">Удалить</button>
-                <button id="randomTreeBtn" class="btn">Сгенерировать дерево</button>
-                <button id="findBtn" class="btn">Найти</button>
+                <input id="input" value="" class="button-field__input" type="text" placeholder="Введите ключ">
+                <button id="addBtn" class="button-field__btn">Добавить</button>
+                <button id="deleteBtn" class="button-field__btn">Удалить</button>
+                <button id="randomTreeBtn" class="button-field__btn">Сгенерировать дерево</button>
+                <button id="findBtn" class="button-field__btn">Найти</button>
             </div>
             <div class="data">
-                <div class="data-info"></div>
+                <div class="data__info"></div>
             </div>
-            <div class="figure" id="inner-container">
-                <div class="inner"></div>
-            </div>
+            <div class="figure"></div>
         </div>
-
     </div>
-</div>
 <script type="module" src="../release/test.js"></script>
 </body>
 </html>

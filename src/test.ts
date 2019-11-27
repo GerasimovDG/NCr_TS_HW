@@ -1,8 +1,8 @@
 import { BinaryTree } from "./binary-tree.js";
-import { DeleteTree, DrawData, DrawTree, RemoveTree } from "./draw-tree.js";
-import { MyNode } from "./my-node";
+import { DrawTreeService } from "./draw-tree.js";
+import { MyNode } from "./my-node.js";
 
-
+const drawTreeService: DrawTreeService<string> = new DrawTreeService<string>();
 const tree: BinaryTree<string> = new BinaryTree<string>();
 
 tree.addNode(16, "Apple");
@@ -24,7 +24,9 @@ console.dir("Корень дерева:");
 console.dir(node);
 
 console.log(tree);
-DrawTree(tree);
+
+drawTreeService.drawTree(tree);
+
 
 const addBtn = document.getElementById("addBtn");
 const deleteBtn = document.getElementById("deleteBtn");
@@ -35,40 +37,46 @@ function addNode(): void {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     tree.addNode(+val);
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 function deleteNode(): void {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     const value: number = parseFloat(val);
     tree.deleteNode(value);
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 function findNode(): void {
     const text = document.getElementsByTagName("input")[0];
     const val = text.value;
     const value: number = parseFloat(val);
     const searchNode: MyNode<string> = tree.searchNode(value);
-    console.log((searchNode.getData()));
-    DrawData(searchNode);
+    if (searchNode) {
+        console.log((searchNode.getData()));
+        drawTreeService.drawData(searchNode);
+    } else {
+        console.log("Нет такой вершины!");
+        drawTreeService.drawData(null);
+    }
+
 }
-function deleteTree(): void {
-    RemoveTree(tree);
-    DeleteTree(tree);
+function delTree(): void {
+    drawTreeService.removeTree(tree);
+    drawTreeService.deleteTree(tree);
 }
-function RandGenerateTree(): void {
-    deleteTree();
+function randGenerateTree(): void {
+    delTree();
     for ( let i = 0; i < 10; i++) {
         const randNumb: number = Math.floor(Math.random() * (40 - 1 + 1)) + 1;
         tree.addNode(randNumb);
     }
-    DrawTree(tree);
+    drawTreeService.drawTree(tree);
 }
 
 // обработка нажатий на кнопки
 addBtn.addEventListener("click", addNode);
 deleteBtn.addEventListener("click", deleteNode);
-randomTreeBtn.addEventListener("click", RandGenerateTree);
+randomTreeBtn.addEventListener("click", randGenerateTree);
 findBtn.addEventListener("click", findNode);
 
 
