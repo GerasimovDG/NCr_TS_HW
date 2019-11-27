@@ -1,0 +1,17 @@
+{
+  "name": "name",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm run lint && gulp scripts",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.14",
+    "gulp": "4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-typescript": "6.0.0-alpha.1",
+    "tslint": "^5.20.1",
+    "typescript": "3.5.3"
+  }
+}
