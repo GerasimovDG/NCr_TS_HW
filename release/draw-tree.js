@@ -26,9 +26,9 @@ export class DrawTreeService {
             intoDiv[0].appendChild(div);
             return;
         }
-        node.getData()
-            ? div.innerHTML = "Key: " + node.getKey().toString() + "<br>Data: " + JSON.stringify(node.getData())
-            : div.innerHTML = "Key: " + node.getKey().toString() + "<br>Data: " + "Пусто";
+        node.Data
+            ? div.innerHTML = "Key: " + node.Key.toString() + "<br>Data: " + JSON.stringify(node.Data)
+            : div.innerHTML = "Key: " + node.Key.toString() + "<br>Data: " + "Пусто";
         intoDiv[0].appendChild(div);
     }
     draw(node, isLeft, x, level) {
@@ -36,7 +36,7 @@ export class DrawTreeService {
         const div = document.createElement("div");
         const length = 50;
         div.className = "figure__element";
-        div.innerHTML = "<div class='text'>" + node.getKey().toString() + "</div>";
+        div.innerHTML = "<div class='text'>" + node.Key.toString() + "</div>";
         if (isLeft === "left") {
             div.style.left = x - 20 + "px";
             div.style.top = level * length + "px";
@@ -75,26 +75,26 @@ export class DrawTreeService {
     }
     drawRec(node, length, level, isLeft, x) {
         this.draw(node, isLeft, x, level);
-        if (node.getLeft()) {
+        if (node.LeftChild) {
             x -= length / 2;
-            this.drawRec(node.getLeft(), length / 2, level + 1, "left", x);
+            this.drawRec(node.LeftChild, length / 2, level + 1, "left", x);
             x += length / 2;
         }
-        if (node.getRight()) {
+        if (node.RightChild) {
             x += length / 2;
-            this.drawRec(node.getRight(), length / 2, level + 1, "right", x);
+            this.drawRec(node.RightChild, length / 2, level + 1, "right", x);
         }
     }
     drawRecLine(node, length, level, isLeft, x) {
         this.drawLine(node, isLeft, x, level, length);
-        if (node.getLeft()) {
+        if (node.LeftChild) {
             x -= length / 2;
-            this.drawRecLine(node.getLeft(), length / 2, level + 1, "left", x);
+            this.drawRecLine(node.LeftChild, length / 2, level + 1, "left", x);
             x += length / 2;
         }
-        if (node.getRight()) {
+        if (node.RightChild) {
             x += length / 2;
-            this.drawRecLine(node.getRight(), length / 2, level + 1, "right", x);
+            this.drawRecLine(node.RightChild, length / 2, level + 1, "right", x);
         }
     }
 }

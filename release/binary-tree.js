@@ -18,17 +18,17 @@ export class BinaryTree {
         }
         while (true) {
             parent = current;
-            if (numb < current.getKey()) {
-                current = current.getLeft();
+            if (numb < current.Key) {
+                current = current.LeftChild;
                 if (current == null) {
-                    parent.setLeft(newNode);
+                    parent.LeftChild = newNode;
                     return;
                 }
             }
             else {
-                current = current.getRight();
+                current = current.RightChild;
                 if (current == null) {
-                    parent.setRight(newNode);
+                    parent.RightChild = newNode;
                     return;
                 }
             }
@@ -41,11 +41,11 @@ export class BinaryTree {
     // поиск по ключу
     searchNode(key) {
         let tmpNode = this._root;
-        if (key === tmpNode.getKey()) {
+        if (key === tmpNode.Key) {
             return this._root;
         }
-        while (key !== tmpNode.getKey()) {
-            key > tmpNode.getKey() ? tmpNode = tmpNode.getRight() : tmpNode = tmpNode.getLeft();
+        while (key !== tmpNode.Key) {
+            key > tmpNode.Key ? tmpNode = tmpNode.RightChild : tmpNode = tmpNode.LeftChild;
             if (tmpNode == null) {
                 return null;
             }
@@ -56,16 +56,16 @@ export class BinaryTree {
     getSuccessor(deleteNode) {
         let parentSuccessor = deleteNode;
         let successor = deleteNode;
-        let current = successor.getRight();
+        let current = successor.RightChild;
         while (current != null) {
             parentSuccessor = successor;
             successor = current;
-            current = current.getLeft();
+            current = current.LeftChild;
         }
-        if (successor !== deleteNode.getRight()) {
-            parentSuccessor.setLeft(successor.getRight());
-            successor.setRight(deleteNode.getRight());
-            successor.setLeft(deleteNode.getLeft());
+        if (successor !== deleteNode.RightChild) {
+            parentSuccessor.LeftChild = successor.RightChild;
+            successor.RightChild = deleteNode.RightChild;
+            successor.LeftChild = deleteNode.LeftChild;
         }
         return successor;
     }
@@ -74,72 +74,72 @@ export class BinaryTree {
         let current = this._root;
         let parent = current;
         let isLeftChild = false;
-        while (current.getKey() !== key) {
+        while (current.Key !== key) {
             parent = current;
-            if (key < current.getKey()) {
-                current = current.getLeft();
+            if (key < current.Key) {
+                current = current.LeftChild;
                 isLeftChild = true;
             }
             else {
-                current = current.getRight();
+                current = current.RightChild;
                 isLeftChild = false;
             }
             if (current == null) {
                 return false;
             }
         }
-        if (current.getLeft() == null && current.getRight() == null) {
+        if (current.LeftChild == null && current.RightChild == null) {
             if (current === this._root) {
                 current = null;
             }
             else {
                 if (isLeftChild) {
-                    parent.setLeft(null);
+                    parent.LeftChild = null;
                 }
                 else {
-                    parent.setRight(null);
+                    parent.RightChild = null;
                 }
             }
             return true;
         }
-        if (current.getRight() == null) {
+        if (current.RightChild == null) {
             if (current === this._root) {
-                this._root = current.getLeft();
+                this._root = current.LeftChild;
                 return true;
             }
             if (isLeftChild) {
-                parent.setLeft(current.getLeft());
+                parent.LeftChild = current.LeftChild;
             }
             else {
-                parent.setRight(current.getLeft());
+                parent.RightChild = current.LeftChild;
             }
             return true;
         }
-        if (current.getLeft() == null) {
+        if (current.LeftChild == null) {
             if (current === this._root) {
-                this._root = current.getRight();
+                this._root = current.RightChild;
                 return true;
             }
             if (isLeftChild) {
-                parent.setLeft(current.getRight());
+                parent.LeftChild = current.RightChild;
             }
             else {
-                parent.setRight(current.getRight());
+                parent.RightChild = current.RightChild;
             }
             return true;
         }
-        if (current.getLeft() && current.getRight()) {
+        if (current.LeftChild && current.RightChild) {
             const successor = this.getSuccessor(current);
             if (current === this._root) {
                 this._root = successor;
             }
             else if (isLeftChild) {
-                parent.setLeft(successor);
+                parent.LeftChild = successor;
             }
             else {
-                parent.setRight(successor);
+                parent.RightChild = successor;
             }
-            successor.setLeft(current.getLeft());
+            successor.LeftChild = current.LeftChild;
         }
         return true;
     }

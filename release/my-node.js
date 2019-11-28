@@ -5,28 +5,28 @@ export class MyNode {
         this.right = null;
         data ? this.data = data : this.data = null;
     }
-    getKey() {
+    get Key() {
         return this.key;
     }
-    getData() {
+    get Data() {
         if (this.data) {
             return this.data;
         }
         return null;
     }
-    getLeft() {
+    set Data(data) {
+        this.data = data;
+    }
+    get LeftChild() {
         return this.left;
     }
-    getRight() {
-        return this.right;
-    }
-    setLeft(left) {
+    set LeftChild(left) {
         this.left = left;
     }
-    setRight(right) {
-        this.right = right;
+    get RightChild() {
+        return this.right;
     }
-    setData(data) {
-        this.data = data;
+    set RightChild(right) {
+        this.right = right;
     }
 }

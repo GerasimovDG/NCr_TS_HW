@@ -43,7 +43,7 @@ function findNode() {
     const value = parseFloat(val);
     const searchNode = tree.searchNode(value);
     if (searchNode) {
-        console.log((searchNode.getData()));
+        console.log((searchNode.Data));
         drawTreeService.drawData(searchNode);
     }
     else {

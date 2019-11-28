@@ -52,7 +52,7 @@ function findNode(): void {
     const value: number = parseFloat(val);
     const searchNode: MyNode<string> = tree.searchNode(value);
     if (searchNode) {
-        console.log((searchNode.getData()));
+        console.log((searchNode.Data));
         drawTreeService.drawData(searchNode);
     } else {
         console.log("Нет такой вершины!");

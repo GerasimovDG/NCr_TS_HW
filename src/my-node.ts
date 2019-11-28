@@ -1,8 +1,8 @@
 interface INode<T> {
-    getKey(): number;
-    getData(): T;
-    getLeft(): INode<T>;
-    getRight(): INode<T>;
+    Key: number;
+    Data: T;
+    LeftChild: INode<T>;
+    RightChild: INode<T>;
 }
 
 export class MyNode<T> implements INode<T> {
@@ -18,28 +18,30 @@ export class MyNode<T> implements INode<T> {
         data ? this.data = data : this.data = null;
     }
 
-    getKey(): number {
+    get Key(): number {
         return this.key;
     }
-    getData(): T {
+
+    get Data(): T {
         if (this.data) {
             return this.data;
         }
         return null;
     }
-    getLeft(): MyNode<T> {
-        return this.left;
-    }
-    getRight(): MyNode<T> {
-        return this.right;
-    }
-    setLeft(left: MyNode<T>): void {
-        this.left = left;
-    }
-    setRight(right: MyNode<T>): void {
-        this.right = right;
-    }
-    setData(data: T): void {
+    set Data(data: T) {
         this.data = data;
     }
+    get LeftChild(): MyNode<T> {
+        return this.left;
+    }
+    set LeftChild(left: MyNode<T>) {
+        this.left = left;
+    }
+    get RightChild(): MyNode<T> {
+        return this.right;
+    }
+    set RightChild(right: MyNode<T>) {
+        this.right = right;
+    }
+
 }
